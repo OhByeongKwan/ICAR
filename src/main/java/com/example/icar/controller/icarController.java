@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class icarController {
     @GetMapping("/")
     public String main(){
-        return "/index";
+        return "index";
     }
 }
