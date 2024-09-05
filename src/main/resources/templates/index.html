@@ -4,9 +4,43 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/main.scss">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <title>ICAR - HOME</title>
 </head>
 <body>
-<div>페이지 테스트!</div>
+<main>
+    <div class="main-container">
+        <div class="main-header">
+            <div class="d-flex align-items-center" style="gap:12px">
+                <img class="main-logo" src="/assets/main/logo.svg">
+                <div class="main-text fs-24 fw-bold" style="color:#336CF2">Hi <red style="color:#FF0000">i</red> CAR!</div>
+            </div>
+            <div class="sub-text">Inventory Management System</div>
+        </div>
+        <div class="main-content">
+            <div role="button" class="search-box d-flex justify-content-between align-items-center" style="gap:30px" onclick="Page.go('/search')">
+                <div class="fs-18 fw-bold">i Car 재고검색</div>
+                <img src="/assets/main/main_search.svg">
+            </div>
+            <div role="button" class="regist-box d-flex justify-content-between align-items-center" style="gap:30px" onclick="Page.go('/regist')">
+                <div class="fs-18 fw-bold">헤드라이트 재고등록</div>
+                <img src="/assets/main/main_regist.svg">
+            </div>
+        </div>
+    </div>
+    <footer class="d-flex w-100">
+        <div role="button" class="col-4 regist-btn" onclick="Page.go('/regist')"><img src="/assets/main/mobile_regist.svg"></div>
+        <div role="button" class="col-4 home-btn" onclick="Page.go('/')"><img src="/assets/main/mobile_home_active.svg"></div>
+        <div role="button" class="col-4 search-btn" onclick="Page.go('/search')"><img src="/assets/main/mobile_search.svg"></div>
+    </footer>
+</main>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.js"></script>
+<script src="/js/core.js"></script>
+<script src="/js/axios.js"></script>
+<script>
+</script>
 </body>
 </html>
