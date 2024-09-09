@@ -1,0 +1,99 @@
+.main-container{
+  padding:73px 20px 60px;
+  .main-header{
+    padding-bottom:27px;
+    border-bottom:2px solid #336DF3;
+  }
+  .content-box{
+    padding-top:30px;
+    .inventory-select{
+      .select-title-box{
+        padding:3px 10px;
+        background-color:#EDEDED;
+        border-radius:5px;
+        border: none;
+        width:170px;
+      }
+      .select-list{
+        gap:6px;
+        display:none;
+        z-index:1;
+        width:170px;
+        border-radius:5px;
+        padding:3px 10px;
+        background-color: #EDEDED;
+        outline: 1px solid #7C7C7C;
+        li{
+          list-style-type: none;
+        }
+      }
+      .select-list::after{
+        position:absolute;
+        right:10px;
+        content:url("../assets/regist/dropdown_arrow.svg");
+      }
+      .select-list.active{
+        display:flex;
+      }
+    }
+
+    .type-select{
+      .type-title-box{
+        padding:3px 10px;
+        background-color:#EDEDED;
+        border-radius:5px;
+        border: none;
+        width:170px;
+      }
+      .type-list{
+        gap:6px;
+        display:none;
+        z-index:1;
+        width:170px;
+        border-radius:5px;
+        padding:3px 10px;
+        background-color: #EDEDED;
+        outline: 1px solid #7C7C7C;
+        li{
+          list-style-type: none;
+        }
+      }
+      .type-list::after{
+        position:absolute;
+        right:10px;
+        content:url("../assets/regist/dropdown_arrow.svg");
+      }
+      .type-list.active{
+        display:flex;
+      }
+    }
+  }
+}
+.add-btn{
+  min-width:42px;
+  padding:4px 8px;
+  border: 1px solid #D7E3FF;
+  background-color: #ECF5FF;
+  color:#336DF3;
+  border-radius:5px;
+  font-size:12px;
+}
+.delete-btn{
+  min-width:42px;
+  padding:4px 8px;
+  border: 1px solid #FFC1C1;
+  background-color: #FFE0E0;
+  color:#FF0000;
+  border-radius:5px;
+  font-size:12px;
+}
+.add-inven-btn{
+  padding: 11px 0;
+  background-color: #336DF3;
+  border-radius:5px;
+  margin-top:-6px;
+  color:white;
+}
+input, textarea{
+  padding:4px;
+}

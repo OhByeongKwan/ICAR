@@ -4,12 +4,85 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/main.scss">
+    <link rel="stylesheet" href="/css/core.scss">
+    <link rel="stylesheet" href="/css/regist.scss">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <title>ICAR - REGIST</title>
 </head>
 <body>
 <main>
+    <div class="main-container">
+        <div class="main-header d-flex align-items-center justify-content-center position-relative">
+            <img role="button" class="position-absolute" style="left:0" src="/assets/regist/back_btn.svg" onclick="Page.go('/')">
+            <div class="main-title fw-bold fs-22 text-center">헤드라이트 재고등록</div>
+        </div>
+        <div class="content-box d-flex flex-column w-100" style="gap:36px">
+            <div class="inventory-select d-flex justify-content-between align-items-center">
+                <label class="fw-bold">재고선택</label>
+                <div class="position-relative">
+                    <div class="select-title-box d-flex justify-content-between align-items-center" onclick="openInvenList()">
+                        <div class="select-title"></div>
+                        <img src="/assets/regist/dropdown_arrow.svg">
+                    </div>
+                    <div class="select-list position-absolute top-0 flex-column position-relative">
+                        <li class="hl list-item" onclick="invenChange('hl')">헤드라이트</li>
+                        <line style="border: 0.5px solid #7C7C7C;width:100%;order:2"></line>
+                        <li class="hl-jaje list-item" onclick="invenChange('hl-jaje')">헤드라이트 자재</li>
+                        <li class="hl-module list-item" onclick="invenChange('hl-module')">헤드라이트 모듈</li>
+                        <li class="hl-gopum list-item" onclick="invenChange('hl-gopum')">헤드라이트 고품</li>
+                    </div>
+                </div>
+            </div>
+            <div class="type-select d-flex justify-content-between align-items-center">
+                <label class="fw-bold">구분</label>
+                <div class="position-relative">
+                    <div class="type-title-box d-flex justify-content-between align-items-center" onclick="openTypeList()">
+                        <div class="type-title"></div>
+                        <img src="/assets/regist/dropdown_arrow.svg">
+                    </div>
+                    <div class="type-list position-absolute top-0 flex-column position-relative">
+                        <li class="drl list-item" onclick="typeChange('drl')">drl 파이프</li>
+                        <line style="border: 0.5px solid #7C7C7C;width:100%;order:2"></line>
+                        <li class="cover list-item" onclick="typeChange('cover')">커버</li>
+                        <li class="housing list-item" onclick="typeChange('housing')">하우징</li>
+                        <li class="bezel list-item" onclick="typeChange('bezel')">베젤</li>
+                    </div>
+                </div>
+            </div>
+            <div class="item-name d-flex justify-content-between align-items-center">
+                <label class="fw-bold" style="width:90px">부품명</label>
+                <input class="w-100" maxlength="50" type="text" style="border-radius:5px;background-color:#EDEDED;border:none" />
+            </div>
+            <div class="item-code d-flex justify-content-between align-items-center">
+                <label class="fw-bold" style="width:90px">부품코드</label>
+                <input class="w-100" maxlength="50" type="text" style="border-radius:5px;background-color:#EDEDED;border:none" />
+            </div>
+            <div class="item-year d-flex justify-content-between align-items-center">
+                <label class="fw-bold" style="width:90px">연식</label>
+                <input class="w-100" maxlength="50" type="text" style="border-radius:5px;background-color:#EDEDED;border:none" />
+            </div>
+            <div class="item-location d-flex justify-content-between align-items-center">
+                <label class="fw-bold" style="width:90px">위치</label>
+                <input class="w-100" maxlength="100" type="text" style="border-radius:5px;background-color:#EDEDED;border:none" />
+            </div>
+            <div class="item-img">
+                <label class="fw-bold" style="width:90px">사진</label>
+                <div class="d-flex gap-2 align-items-center mt-2">
+                    <input class="w-100" placeholder="첨부파일" style="border-radius:5px;background-color:#EDEDED;border:none" readonly/>
+                    <input class="d-none" id="itemImg" type="file" accept="image/*">
+                    <label for="itemImg"><div class="add-btn" role="button">등록</div></label>
+                    <div class="delete-btn" role="button">삭제</div>
+                </div>
+            </div>
+            <div class="item-note">
+                <label class="fw-bold" style="width:90px">비고</label>
+                <div class="mt-2">
+                    <textarea class="w-100" maxlength="300" type="text" style="border-radius:5px;background-color:#EDEDED;border:none;min-height:74px" placeholder="비고사항을 입력하세요."></textarea>
+                </div>
+            </div>
+            <div class="add-inven-btn w-100 fw-bold text-center" role="button">등록하기</div>
+        </div>
+    </div>
     <footer class="d-flex w-100">
         <div role="button" class="col-4 regist-btn" onclick="Page.go('/regist')"><img src="/assets/main/mobile_regist_active.svg"></div>
         <div role="button" class="col-4 home-btn" onclick="Page.go('/')"><img src="/assets/main/mobile_home.svg"></div>
@@ -22,6 +95,39 @@
 <script src="/js/core.js"></script>
 <script src="/js/axios.js"></script>
 <script>
+    $(document).ready(()=>{
+        invenChange('hl');
+        typeChange('drl');
+    });
+    function openInvenList(){
+        $('.inventory-select .select-list').addClass('active');
+    }
+
+    function openTypeList(){
+        $('.type-select .type-list').addClass('active');
+    }
+
+    function invenChange(target){
+        $('.inventory-select .select-title')[0].innerText = $(`.inventory-select .select-list .${target}`)[0].innerText;
+        let obj = $('.inventory-select .select-list .list-item');
+        for(let list of obj){
+            $(list).css('order', '3');
+        }
+        $(`.inventory-select .select-list .${target}`).css('order', '1');
+
+        $('.inventory-select .select-list').removeClass('active');
+    }
+
+    function typeChange(target){
+        $('.type-select .type-title')[0].innerText = $(`.type-select .type-list .${target}`)[0].innerText;
+        let obj = $('.type-select .type-list .list-item');
+        for(let list of obj){
+            $(list).css('order', '3');
+        }
+        $(`.type-select .type-list .${target}`).css('order', '1');
+
+        $('.type-select .type-list').removeClass('active');
+    }
 </script>
 </body>
 </html>
