@@ -5,18 +5,18 @@ let Dialog = {
     data: {},
     modal: null,
     init: function() {
-        $("body .mobile-container").append(`<div id="dialog" class="modal show" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title"></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        $("body").append(`<div id="dialog" class="modal show" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered mx-auto" style="max-width:240px">
+                <div class="modal-content" style="padding:10px 10px 0">
+<!--                    <div class="modal-header" style="border-bottom:none">-->
+<!--                        <h5 class="modal-title"></h5>-->
+<!--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                    </div>-->
+                    <div class="modal-body fw-bold text-center" style="padding:26px 0 13px">
                     </div>
-                    <div class="modal-body">
-                    </div>
-                    <div class="modal-footer">
-                        <button id="dialogCancel" type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">취소</button>
-                        <button id="dialogOk" type="button" class="btn btn-sm btn-primary">확인</button>
+                    <div class="modal-footer d-flex justify-content-center" style="padding:0">
+                        <div class="w-50 text-center m-0" role="button" id="dialogCancel" style="padding:14px 0 14px" data-bs-dismiss="modal">취소</div>
+                        <div role="button" class="fw-bold w-50 text-center m-0" style="color:#336DF3;padding:14px 0 14px" id="dialogOk">확인</div>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,6 @@ let Dialog = {
     },
     alert: function(msg, okCallback, data) {
         Dialog.okCallback = okCallback;
-        Dialog.cancelCallback = okCallback;
         Dialog.data = data;
 
         $('#dialog .modal-body').html(`<div>${msg}</div>`);

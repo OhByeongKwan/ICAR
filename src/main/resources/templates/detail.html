@@ -1,0 +1,132 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/core.scss">
+    <link rel="icon" href="/assets/main/logo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/css/regist.scss">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <title>ICAR - DETAIL</title>
+</head>
+<body>
+<main>
+    <div class="main-container">
+        <div class="main-header d-flex align-items-center justify-content-center position-relative">
+            <img role="button" class="position-absolute" style="left:0" src="/assets/regist/back_btn.svg" onclick="Page.go('/search')">
+            <div class="main-title fw-bold fs-22 text-center">헤드라이트 상세페이지</div>
+        </div>
+        <form id="insertItem" enctype="multipart/form-data">
+            <div class="content-box d-flex flex-column w-100" style="gap:36px">
+                <div class="inventory-select d-flex justify-content-between align-items-center">
+                    <label class="fw-bold">재고선택</label>
+                    <div class="position-relative">
+                        <div role="button" class="select-title-box d-flex justify-content-between align-items-center">
+                            <div class="select-title" name="inventory-name" th:text="${item.inventory}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="type-select d-flex justify-content-between align-items-center">
+                    <label class="fw-bold">구분</label>
+                    <div class="position-relative">
+                        <div role="button" class="type-title-box d-flex justify-content-between align-items-center">
+                            <div class="type-title" name="type-name" th:text="${item.type}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-name item-box d-flex justify-content-between align-items-center">
+                    <label class="fw-bold" style="width:90px">부품명</label>
+                    <input class="w-100" maxlength="50" type="text" name="name" style="border-radius:5px;background-color:#EDEDED;border:none" placeholder="부품명 입력" th:value="${item.name}" readonly />
+                </div>
+                <div class="item-code item-box d-flex justify-content-between align-items-center">
+                    <label class="fw-bold" style="width:90px">부품코드</label>
+                    <input class="w-100" maxlength="50" type="text" name="code" style="border-radius:5px;background-color:#EDEDED;border:none" placeholder="부품코드 입력" th:value="${item.code}" readonly />
+                </div>
+                <div class="item-year item-box d-flex justify-content-between align-items-center">
+                    <label class="fw-bold" style="width:90px">연식</label>
+                    <input class="w-100" maxlength="50" type="text" name="year" style="border-radius:5px;background-color:#EDEDED;border:none" placeholder="연식 입력" th:value="${item.year}" readonly />
+                </div>
+                <div class="item-location item-box d-flex justify-content-between align-items-center">
+                    <label class="fw-bold" style="width:90px">위치</label>
+                    <input class="w-100" maxlength="100" type="text" name="location" style="border-radius:5px;background-color:#EDEDED;border:none" placeholder="위치 입력" th:value="${item.location}" readonly />
+                </div>
+                <div class="item-img item-box d-flex flex-column w-100">
+                    <label class="fw-bold" style="width:90px">사진</label>
+                    <noti class="fw-bold" style="color:red;font-size:12px">* 사진은 수정이 불가합니다!</noti>
+                    <div class="d-flex gap-2 align-items-center mt-2">
+                        <img th:src="@{'/uploads/'+${item.storeName}+'?timeStamp='+${currentTime}}" style="max-width:100%;aspect-ratio:1/1;border-radius:5px">
+                    </div>
+                </div>
+                <div class="item-note">
+                    <label class="fw-bold" style="width:90px">비고</label>
+                    <div class="mt-2">
+                        <textarea class="w-100" name="note" maxlength="300" type="text" style="border-radius:5px;background-color:#EDEDED;border:none;min-height:74px" placeholder="비고사항을 입력하세요." th:text="${item.note}" readonly></textarea>
+                    </div>
+                </div>
+                <div role="button" class="add-inven-btn w-100 fw-bold text-center" th:onclick="|Page.go('/edit?idx=@{${item.idx}}')|">수정하기</div>
+            </div>
+        </form>
+    </div>
+    <footer class="w-100">
+        <div role="button" class="col-4 regist-btn" onclick="Page.go('/regist')"><img src="/assets/main/mobile_regist.svg"></div>
+        <div role="button" class="col-4 home-btn" onclick="Page.go('/')"><img src="/assets/main/mobile_home.svg"></div>
+        <div role="button" class="col-4 search-btn" onclick="Page.go('/search')"><img src="/assets/main/mobile_search.svg"></div>
+    </footer>
+</main>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.js"></script>
+<script src="/js/core.js"></script>
+<script src="/js/axios.js"></script>
+<script th:inline="javascript">
+    $(document).ready(()=>{
+        let inven = '';
+
+        if([[${item.inventory}]] == '헤드라이트'){
+            inven = 'hl';
+        }else if([[${item.inventory}]] == '헤드라이트 모듈'){
+            inven = 'hl-module';
+        }else if([[${item.inventory}]] == '헤드라이트 자재'){
+            inven = 'hl-jaje';
+        }else{
+            inven = 'hl-gopum';
+        }
+
+        disappearInput(inven);
+    });
+
+    function disappearInput(target){
+        let arr = $('.content-box>div');
+
+        if(target === 'hl-gopum'){
+            for(let input of arr){
+                $(input).addClass('active');
+            }
+            $('.content-box .item-note').removeClass('active');
+            $('.content-box .inventory-select').removeClass('active');
+            return;
+        }
+
+        for(let input of arr){
+            $(input).removeClass('active');
+        }
+
+        switch (target){
+            case 'hl' :
+                console.log(target)
+                $('.content-box .type-select').addClass('active');
+                break;
+            case 'hl-jaje' :
+                console.log(target)
+                $('.content-box .item-note').addClass('active');
+                break;
+            case 'hl-module' :
+                console.log(target)
+                $('.content-box .type-select').addClass('active');
+                break;
+        }
+    }
+</script>
+</body>
+</html>

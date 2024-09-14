@@ -4,13 +4,27 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/main.scss">
+    <link rel="stylesheet" href="/css/core.scss">
+    <link rel="icon" href="/assets/main/logo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/css/search.scss">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <title>ICAR - SEARCH</title>
 </head>
 <body>
 <main>
-    <footer class="d-flex w-100">
+    <div class="main-container">
+        <div class="main-header d-flex align-items-center justify-content-center position-relative">
+            <img role="button" class="position-absolute" style="left:0" src="/assets/regist/back_btn.svg" onclick="Page.go('/')">
+            <div class="main-title fw-bold fs-22 text-center">i Car 재고 검색</div>
+        </div>
+        <div class="position-relative">
+            <input class="search-box w-100">
+            <img role="button" class="search-icon position-absolute" src="/assets/search/search_box.svg" onclick="searchText()">
+        </div>
+        <div class="all-text">전체</div>
+        <div class="item-list"></div>
+    </div>
+    <footer class="w-100">
         <div role="button" class="col-4 regist-btn" onclick="Page.go('/regist')"><img src="/assets/main/mobile_regist.svg"></div>
         <div role="button" class="col-4 home-btn" onclick="Page.go('/')"><img src="/assets/main/mobile_home.svg"></div>
         <div role="button" class="col-4 search-btn" onclick="Page.go('/search')"><img src="/assets/main/mobile_search_active.svg"></div>
@@ -22,6 +36,120 @@
 <script src="/js/core.js"></script>
 <script src="/js/axios.js"></script>
 <script>
+    $(document).ready(()=>{
+       AJAX.get('/getItemAll').then((res)=>{
+          console.log(res);
+          setItemList(res);
+       });
+
+        Dialog.init();
+    });
+
+    function setItemList(res){
+        let timestamp = Date.now();
+
+        $('.main-container .item-list *').remove();
+        for(let target of res){
+            if(target.inventory == '헤드라이트 고품'){
+                $('.main-container .item-list').append(`<div class="content-item item-${target.idx}" data-id="${target.idx}">
+                <div role="button" class="item-info-box" onclick="Page.go('/detail?idx=${target.idx}')">
+                    <div class="item-info" style="max-width:100%;margin-left:0">
+                        <div class="item-note item d-block">
+                            <label>비고</label>
+                            <textarea class="w-100" style="height:119px;border:none;cursor: pointer;outline:none">${target.note}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttons d-flex">
+                    <div role="button" class="use-btn w-50" onclick="useDeleteItem(${target.idx})">사용</div>
+                    <div role="button" class="send-btn w-50" onclick="sendDeleteItem(${target.idx})">출고</div>
+                </div>
+            </div>`);
+
+                continue;
+            }
+            $('.main-container .item-list').append(`<div class="content-item item-${target.idx}" data-id="${target.idx}">
+                <div class="item-info-box">
+                    <img role="button" class="item-img" src="/uploads/${target.storeName}?timestamp=${timestamp}" onclick="Page.go('/detail?idx=${target.idx}')">
+                    <div class="item-info">
+                        <div class="item-name item d-block">
+                            <label>부품명</label>
+                            <div>${target.name}</div>
+                        </div>
+                        <div class="item-code item">
+                            <label>부품코드</label>
+                            <div>${target.code}</div>
+                        </div>
+                        <div class="item-year item">
+                            <label>연식</label>
+                            <div>${target.year}</div>
+                        </div>
+                        <div class="item-location item">
+                            <label>위치</label>
+                            <div>${target.location}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttons d-flex">
+                    <div role="button" class="use-btn w-50" onclick="useDeleteItem(${target.idx})">사용</div>
+                    <div role="button" class="send-btn w-50" onclick="sendDeleteItem(${target.idx})">출고</div>
+                </div>
+            </div>`);
+        }
+    }
+
+    function searchText(){
+        let text = $('.search-box')[0].value;
+
+        let itemList = $('.content-item');
+
+        for(let item of itemList){
+            let cls = $(item)[0].className.split(' ')[1];
+
+            if($(`.${cls} .item-name div`)[0] == undefined){
+                if($(`.${cls} .item-note textarea`)[0].value.indexOf(text)!= -1){
+                    $(item).removeClass('hide');
+                }else{
+                    $(item).addClass('hide');
+                }
+                continue;
+            }
+
+            if($(`.${cls} .item-name div`)[0].innerText.indexOf(text)!= -1){
+                $(item).removeClass('hide');
+            }else{
+                $(item).addClass('hide');
+            }
+        }
+    }
+
+    function useDeleteItem(idx){
+        console.log(idx);
+
+        Dialog.confirm("사용하시겠습니까?")
+
+        Dialog.confirm('사용하시겠습니까?', ()=>{
+            AJAX.delete(`/deleteItem/${idx}`).then((res)=>{
+                console.log(res);
+                Dialog.alert('사용되었습니다.', ()=>{
+                    Page.reload();
+                });
+            });
+        });
+    }
+
+    function sendDeleteItem(idx){
+        console.log(idx);
+
+        Dialog.confirm('출고하시겠습니까?', ()=>{
+            AJAX.delete(`/deleteItem/${idx}`).then((res)=>{
+                console.log(res);
+                Dialog.alert('출고되었습니다.', ()=>{
+                    Page.reload();
+                });
+            });
+        });
+    }
 </script>
 </body>
 </html>

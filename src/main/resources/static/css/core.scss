@@ -11,6 +11,7 @@ body{
 }
 
 footer{
+  display:flex;
   z-index:1000;
   padding:11px 0;
   background-color:#336DF3;
@@ -22,6 +23,10 @@ footer{
     text-align:center;
     margin:auto 0;
   }
+}
+
+textarea{
+  resize:none!important;
 }
 
 .fs-14{font-size:14px}
@@ -55,5 +60,8 @@ footer{
         padding:25px 16%;
       }
     }
+  }
+  footer{
+    display:none;
   }
 }

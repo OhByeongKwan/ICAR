@@ -1,0 +1,94 @@
+.main-container {
+  padding: 73px 20px 60px;
+
+  .main-header {
+    padding-bottom: 24px;
+  }
+  .search-box{
+    border-radius:5px;
+    padding:5px 20px;
+    border:1px solid #D7E3FF;
+    background-color:#ECF5FF;
+  }
+  .search-icon{
+    right:20px;
+    top:50%;
+    transform:translateY(-50%);
+  }
+  .all-text{
+    margin-top:14px;
+    color:#336DF3;
+    font-weight:bold;
+    padding-bottom:4px;
+    border-bottom: 2px solid #336DF3;
+  }
+  .item-list{
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    .content-item{
+      width:100%;
+      border:1px solid #D7E3FF;
+      border-radius:5px;
+      .item-info-box{
+        display:flex;
+        padding:10px;
+        .item-img{
+          aspect-ratio:1/1;
+          max-width:140px;
+          width:45%;
+          border-radius:5px;
+        }
+        .item-info{
+          max-width:55%;
+          width:100%;
+          display: flex;
+          flex-direction:column;
+          justify-content:space-between;
+          margin-left:12px;
+          .item{
+            display:flex;
+            font-size:14px;
+            label{
+              max-width:64px;
+              width:100%;
+              color:#336DF3;
+              font-weight:bold;
+            }
+            div{
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+            }
+          }
+        }
+      }
+    }
+    .content-item.hide{
+      display:none;
+    }
+    .use-btn{
+      font-weight:bold;
+      padding:7px 0;
+      color:#FF0000;
+      background-color: #FFE0E0;
+      border-top:1px solid #FFC1C1;
+      text-align:center;
+      border-radius:0 0 0 5px;
+    }
+    .send-btn{
+      font-weight:bold;
+      padding:7px 0;
+      color:#336DF3;
+      background-color: #ECF5FF;
+      border-top:1px solid #D7E3FF;
+      text-align:center;
+      border-radius:0 0 5px 0;
+    }
+  }
+}
+
+input:focus, textarea:focus{
+  outline:2px solid #336DF3;
+}

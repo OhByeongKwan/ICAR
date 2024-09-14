@@ -8,14 +8,14 @@
     <link rel="icon" href="/assets/main/logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="/css/regist.scss">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <title>ICAR - REGIST</title>
+    <title>ICAR - EDIT</title>
 </head>
 <body>
 <main>
     <div class="main-container">
         <div class="main-header d-flex align-items-center justify-content-center position-relative">
-            <img role="button" class="position-absolute" style="left:0" src="/assets/regist/back_btn.svg" onclick="Page.go('/')">
-            <div class="main-title fw-bold fs-22 text-center">헤드라이트 재고등록</div>
+            <img role="button" class="position-absolute" style="left:0" src="/assets/regist/back_btn.svg" th:onclick="|Page.go('/detail?idx=@{${item.idx}}')|">
+            <div class="main-title fw-bold fs-22 text-center">헤드라이트 재고수정</div>
         </div>
         <form id="insertItem" enctype="multipart/form-data">
             <div class="content-box d-flex flex-column w-100" style="gap:36px">
@@ -23,7 +23,7 @@
                     <label class="fw-bold">재고선택</label>
                     <div class="position-relative">
                         <div role="button" class="select-title-box d-flex justify-content-between align-items-center" onclick="openInvenList()">
-                            <div class="select-title" name="inventory-name"></div>
+                            <div class="select-title" name="inventory-name" th:text="${item.inventory}"></div>
                             <img src="/assets/regist/dropdown_arrow.svg">
                         </div>
                         <div class="select-list position-absolute top-0 flex-column position-relative">
@@ -39,7 +39,7 @@
                     <label class="fw-bold">구분</label>
                     <div class="position-relative">
                         <div role="button" class="type-title-box d-flex justify-content-between align-items-center" onclick="openTypeList()">
-                            <div class="type-title" name="type-name"></div>
+                            <div class="type-title" name="type-name" th:text="${item.type}"></div>
                             <img src="/assets/regist/dropdown_arrow.svg">
                         </div>
                         <div class="type-list position-absolute top-0 flex-column position-relative">
@@ -53,41 +53,33 @@
                 </div>
                 <div class="item-name item-box d-flex justify-content-between align-items-center">
                     <label class="fw-bold" style="width:90px">부품명</label>
-                    <input class="w-100" maxlength="50" type="text" name="name" style="border-radius:5px;background-color:#EDEDED;border:none" placeholder="부품명 입력" required />
+                    <input class="w-100" maxlength="50" type="text" name="name" style="border-radius:5px;background-color:#EDEDED;border:none" placeholder="부품명 입력" th:value="${item.name}" />
                 </div>
                 <div class="item-code item-box d-flex justify-content-between align-items-center">
                     <label class="fw-bold" style="width:90px">부품코드</label>
-                    <input class="w-100" maxlength="50" type="text" name="code" style="border-radius:5px;background-color:#EDEDED;border:none" placeholder="부품코드 입력" required />
+                    <input class="w-100" maxlength="50" type="text" name="code" style="border-radius:5px;background-color:#EDEDED;border:none" placeholder="부품코드 입력" th:value="${item.code}" />
                 </div>
                 <div class="item-year item-box d-flex justify-content-between align-items-center">
                     <label class="fw-bold" style="width:90px">연식</label>
-                    <input class="w-100" maxlength="50" type="text" name="year" style="border-radius:5px;background-color:#EDEDED;border:none" placeholder="연식 입력" required />
+                    <input class="w-100" maxlength="50" type="text" name="year" style="border-radius:5px;background-color:#EDEDED;border:none" placeholder="연식 입력" th:value="${item.year}" />
                 </div>
                 <div class="item-location item-box d-flex justify-content-between align-items-center">
                     <label class="fw-bold" style="width:90px">위치</label>
-                    <input class="w-100" maxlength="100" type="text" name="location" style="border-radius:5px;background-color:#EDEDED;border:none" placeholder="위치 입력" required />
-                </div>
-                <div class="item-img item-box">
-                    <label class="fw-bold" style="width:90px">사진</label>
-                    <div class="d-flex gap-2 align-items-center mt-2">
-                        <input class="w-100 img-name" placeholder="첨부파일" style="border-radius:5px;background-color:#EDEDED;border:none" readonly/>
-                        <input class="d-none" id="itemImg" name="imgName" type="file" onchange="addImg()" required accept="image/*">
-                        <label for="itemImg"><div class="add-btn" role="button">등록</div></label>
-                        <div class="delete-btn" role="button" onclick="removeImg()">삭제</div>
-                    </div>
+                    <input class="w-100" maxlength="100" type="text" name="location" style="border-radius:5px;background-color:#EDEDED;border:none" placeholder="위치 입력" th:value="${item.location}" />
                 </div>
                 <div class="item-note">
                     <label class="fw-bold" style="width:90px">비고</label>
                     <div class="mt-2">
-                        <textarea class="w-100" name="note" maxlength="300" type="text" style="border-radius:5px;background-color:#EDEDED;border:none;min-height:74px" placeholder="비고사항을 입력하세요."></textarea>
+                        <textarea class="w-100" name="note" maxlength="300" type="text" style="border-radius:5px;background-color:#EDEDED;border:none;min-height:74px" placeholder="비고사항을 입력하세요." th:text="${item.note}"></textarea>
                     </div>
                 </div>
-                <div role="button" class="add-inven-btn w-100 fw-bold text-center" onclick="nullType()">등록하기</div>
+                <input type="hidden" name="idx" th:value="${item.idx}">
+                <div role="button" class="add-inven-btn w-100 fw-bold text-center" onclick="nullType()">업데이트</div>
             </div>
         </form>
     </div>
     <footer class="w-100">
-        <div role="button" class="col-4 regist-btn" onclick="Page.go('/regist')"><img src="/assets/main/mobile_regist_active.svg"></div>
+        <div role="button" class="col-4 regist-btn" onclick="Page.go('/regist')"><img src="/assets/main/mobile_regist.svg"></div>
         <div role="button" class="col-4 home-btn" onclick="Page.go('/')"><img src="/assets/main/mobile_home.svg"></div>
         <div role="button" class="col-4 search-btn" onclick="Page.go('/search')"><img src="/assets/main/mobile_search.svg"></div>
     </footer>
@@ -97,12 +89,38 @@
 <script src="/js/bootstrap.bundle.js"></script>
 <script src="/js/core.js"></script>
 <script src="/js/axios.js"></script>
-<script>
+<script th:inline="javascript">
     $(document).ready(()=>{
+        let inven = '';
+        let type = '';
+
+        if([[${item.inventory}]] == '헤드라이트'){
+            inven = 'hl';
+        }else if([[${item.inventory}]] == '헤드라이트 모듈'){
+            inven = 'hl-module';
+        }else if([[${item.inventory}]] == '헤드라이트 자재'){
+            inven = 'hl-jaje';
+        }else{
+            inven = 'hl-gopum';
+        }
+        invenChange(inven);
+
+        if([[${item.type}]] == 'drl 파이프'){
+            type = 'drl';
+        }else if([[${item.type}]] == '커버'){
+            type = 'cover';
+        }else if([[${item.type}]] == '하우징'){
+            type = 'housing';
+        }else if([[${item.type}]] == '베젤'){
+            type = 'bezel';
+        }else{
+            type = 'drl';
+        }
+        typeChange(type);
+
         Dialog.init();
-        invenChange('hl');
-        typeChange('drl');
     });
+
     function openInvenList(){
         $('.inventory-select .select-list').addClass('active');
     }
@@ -111,37 +129,14 @@
         $('.type-select .type-list').addClass('active');
     }
 
-    function invenChange(target){
-        $('.inventory-select .select-title')[0].innerText = $(`.inventory-select .select-list .${target}`)[0].innerText;
-        let obj = $('.inventory-select .select-list .list-item');
-        for(let list of obj){
-            $(list).css('order', '3');
-        }
-        $(`.inventory-select .select-list .${target}`).css('order', '1');
-
-        $('.inventory-select .select-list').removeClass('active');
-
-        disappearInput(target);
-    }
-
-    function typeChange(target){
-        $('.type-select .type-title')[0].innerText = $(`.type-select .type-list .${target}`)[0].innerText;
-        let obj = $('.type-select .type-list .list-item');
-        for(let list of obj){
-            $(list).css('order', '3');
-        }
-        $(`.type-select .type-list .${target}`).css('order', '1');
-
-        $('.type-select .type-list').removeClass('active');
-    }
-
     function disappearInput(target){
-        $('.item-name input')[0].value = null;
-        $('.item-code input')[0].value = null;
-        $('.item-year input')[0].value = null;
-        $('.item-location input')[0].value = null;
-        $('.item-note textarea')[0].value = null;
-        removeImg();
+        if([[${item.inventory}]] != $('.inventory-select .select-title')[0].innerText){
+            $('.item-name input')[0].value = null;
+            $('.item-code input')[0].value = null;
+            $('.item-year input')[0].value = null;
+            $('.item-location input')[0].value = null;
+            $('.item-note textarea')[0].value = null;
+        }
 
         let arr = $('.content-box>div');
 
@@ -173,27 +168,29 @@
                 break;
         }
     }
-    function addImg(){
-        console.log($('#itemImg'))
-        if($('#itemImg')[0].files[0] === null || $('#itemImg')[0].files[0] === undefined || $('#itemImg')[0].files[0] === ""){
-            $('.item-img .img-name')[0].value = null;
-            return;
+
+    function invenChange(target){
+        $('.inventory-select .select-title')[0].innerText = $(`.inventory-select .select-list .${target}`)[0].innerText;
+        let obj = $('.inventory-select .select-list .list-item');
+        for(let list of obj){
+            $(list).css('order', '3');
         }
-        $('.item-img .img-name')[0].value = $('#itemImg')[0].files[0].name;
+        $(`.inventory-select .select-list .${target}`).css('order', '1');
+
+        $('.inventory-select .select-list').removeClass('active');
+
+        disappearInput(target);
     }
 
-    function removeImg(){
-        $('#itemImg')[0].files = null;
-        $('#itemImg')[0].value = "";
-        addImg();
-    }
-
-    function nullType(){
-        if($('.inventory-select .select-title')[0].innerText != '헤드라이트 고품'){
-            nullCheck();
-        }else{
-            gopumNullCheck();
+    function typeChange(target){
+        $('.type-select .type-title')[0].innerText = $(`.type-select .type-list .${target}`)[0].innerText;
+        let obj = $('.type-select .type-list .list-item');
+        for(let list of obj){
+            $(list).css('order', '3');
         }
+        $(`.type-select .type-list .${target}`).css('order', '1');
+
+        $('.type-select .type-list').removeClass('active');
     }
 
     function addItem(){
@@ -208,13 +205,22 @@
         formData.append('inventory', data1);
         formData.append('type', data2);
         let vdata = Utils.formToObject(formData);
+        console.log(vdata);
 
-        AJAX.post('/insertItem', formData).then((res)=>{
+        AJAX.post('/editItem', formData).then((res)=>{
             console.log(res);
-            Dialog.alert('아이템 추가가 완료되었습니다.', ()=>{
-               Page.go('/');
+            Dialog.alert('업데이트가 완료되었습니다.', ()=>{
+                Page.go(`/detail?idx=${[[${item.idx}]]}`);
             });
         });
+    }
+
+    function nullType(){
+        if($('.inventory-select .select-title')[0].innerText != '헤드라이트 고품'){
+            nullCheck();
+        }else{
+            gopumNullCheck();
+        }
     }
 
     function nullCheck(){
@@ -239,12 +245,6 @@
         if($('.item-location input')[0].value === null || $('.item-location input')[0].value === undefined || $('.item-location input')[0].value === ""){
             Dialog.alert(`${$('.item-location label')[0].innerText}을(를) 입력하세요.`, ()=>{
                 $('.item-location input').focus();
-            });
-            return;
-        }
-        if($('.item-img input')[0].value === null || $('.item-img input')[0].value === undefined || $('.item-img input')[0].value === ""){
-            Dialog.alert(`${$('.item-img label')[0].innerText}을(를) 등록하세요.`, ()=>{
-                $('.item-img input').focus();
             });
             return;
         }

@@ -67,6 +67,18 @@
         display:flex;
       }
     }
+    .type-select.active{
+      display: none!important;
+    }
+    .item-img.active{
+      display:none!important;
+    }
+    .item-note.active{
+      display:none;
+    }
+    .item-name.active, .item-code.active, .item-year.active, .item-location.active{
+      display: none!important;
+    }
   }
 }
 .add-btn{
@@ -96,4 +108,7 @@
 }
 input, textarea{
   padding:4px;
+}
+input:focus, textarea:focus{
+  outline:2px solid #336DF3;
 }
