@@ -1,0 +1,93 @@
+.main-container {
+  padding: 73px 20px 60px;
+}
+.main-container .main-header {
+  padding-bottom: 24px;
+}
+.main-container .search-box {
+  border-radius: 5px;
+  padding: 5px 20px;
+  border: 1px solid #D7E3FF;
+  background-color: #ECF5FF;
+}
+.main-container .search-icon {
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.main-container .all-text {
+  margin-top: 14px;
+  color: #336DF3;
+  font-weight: bold;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #336DF3;
+}
+.main-container .item-list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.main-container .item-list .content-item {
+  width: 100%;
+  border: 1px solid #D7E3FF;
+  border-radius: 5px;
+}
+.main-container .item-list .content-item .item-info-box {
+  display: flex;
+  padding: 10px;
+}
+.main-container .item-list .content-item .item-info-box .item-img {
+  aspect-ratio: 1/1;
+  max-width: 140px;
+  width: 45%;
+  border-radius: 5px;
+}
+.main-container .item-list .content-item .item-info-box .item-info {
+  max-width: 55%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 12px;
+}
+.main-container .item-list .content-item .item-info-box .item-info .item {
+  display: flex;
+  font-size: 14px;
+}
+.main-container .item-list .content-item .item-info-box .item-info .item label {
+  max-width: 64px;
+  width: 100%;
+  color: #336DF3;
+  font-weight: bold;
+}
+.main-container .item-list .content-item .item-info-box .item-info .item div {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.main-container .item-list .content-item.hide {
+  display: none;
+}
+.main-container .item-list .use-btn {
+  font-weight: bold;
+  padding: 7px 0;
+  color: #FF0000;
+  background-color: #FFE0E0;
+  border-top: 1px solid #FFC1C1;
+  text-align: center;
+  border-radius: 0 0 0 5px;
+}
+.main-container .item-list .send-btn {
+  font-weight: bold;
+  padding: 7px 0;
+  color: #336DF3;
+  background-color: #ECF5FF;
+  border-top: 1px solid #D7E3FF;
+  text-align: center;
+  border-radius: 0 0 5px 0;
+}
+
+input:focus, textarea:focus {
+  outline: 2px solid #336DF3;
+}

@@ -1,0 +1,23 @@
+.main-container {
+  padding: 80px 20px 0;
+}
+.main-container .sub-text {
+  color: #717171;
+  margin-top: 10px;
+}
+.main-container .main-content {
+  margin-top: 52px;
+}
+.main-container .main-content .search-box {
+  border: 1px solid #D7E3FF;
+  background-color: #ECF5FF;
+  border-radius: 5px;
+  padding: 15px 25px;
+}
+.main-container .main-content .regist-box {
+  border: 1px solid #D7E3FF;
+  background-color: #ECF5FF;
+  border-radius: 5px;
+  padding: 12px 17px;
+  margin-top: 34px;
+}

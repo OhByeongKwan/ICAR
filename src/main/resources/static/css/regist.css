@@ -1,0 +1,114 @@
+.main-container {
+  padding: 73px 20px 60px;
+}
+.main-container .main-header {
+  padding-bottom: 27px;
+  border-bottom: 2px solid #336DF3;
+}
+.main-container .content-box {
+  padding-top: 30px;
+}
+.main-container .content-box .inventory-select .select-title-box {
+  padding: 3px 10px;
+  background-color: #EDEDED;
+  border-radius: 5px;
+  border: none;
+  width: 170px;
+}
+.main-container .content-box .inventory-select .select-list {
+  gap: 6px;
+  display: none;
+  z-index: 1;
+  width: 170px;
+  border-radius: 5px;
+  padding: 3px 10px;
+  background-color: #EDEDED;
+  outline: 1px solid #7C7C7C;
+}
+.main-container .content-box .inventory-select .select-list li {
+  list-style-type: none;
+}
+.main-container .content-box .inventory-select .select-list::after {
+  position: absolute;
+  right: 10px;
+  content: url("../assets/regist/dropdown_arrow.svg");
+}
+.main-container .content-box .inventory-select .select-list.active {
+  display: flex;
+}
+.main-container .content-box .type-select .type-title-box {
+  padding: 3px 10px;
+  background-color: #EDEDED;
+  border-radius: 5px;
+  border: none;
+  width: 170px;
+}
+.main-container .content-box .type-select .type-list {
+  gap: 6px;
+  display: none;
+  z-index: 1;
+  width: 170px;
+  border-radius: 5px;
+  padding: 3px 10px;
+  background-color: #EDEDED;
+  outline: 1px solid #7C7C7C;
+}
+.main-container .content-box .type-select .type-list li {
+  list-style-type: none;
+}
+.main-container .content-box .type-select .type-list::after {
+  position: absolute;
+  right: 10px;
+  content: url("../assets/regist/dropdown_arrow.svg");
+}
+.main-container .content-box .type-select .type-list.active {
+  display: flex;
+}
+.main-container .content-box .type-select.active {
+  display: none !important;
+}
+.main-container .content-box .item-img.active {
+  display: none !important;
+}
+.main-container .content-box .item-note.active {
+  display: none;
+}
+.main-container .content-box .item-name.active, .main-container .content-box .item-code.active, .main-container .content-box .item-year.active, .main-container .content-box .item-location.active {
+  display: none !important;
+}
+
+.add-btn {
+  min-width: 42px;
+  padding: 4px 8px;
+  border: 1px solid #D7E3FF;
+  background-color: #ECF5FF;
+  color: #336DF3;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.delete-btn {
+  min-width: 42px;
+  padding: 4px 8px;
+  border: 1px solid #FFC1C1;
+  background-color: #FFE0E0;
+  color: #FF0000;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.add-inven-btn {
+  padding: 11px 0;
+  background-color: #336DF3;
+  border-radius: 5px;
+  margin-top: -6px;
+  color: white;
+}
+
+input, textarea {
+  padding: 4px;
+}
+
+input:focus, textarea:focus {
+  outline: 2px solid #336DF3;
+}
