@@ -71,7 +71,7 @@
                     <label class="fw-bold" style="width:90px">사진</label>
                     <div class="d-flex gap-2 align-items-center mt-2">
                         <input class="w-100 img-name" placeholder="첨부파일" style="border-radius:5px;background-color:#EDEDED;border:none" readonly/>
-                        <input class="d-none" id="itemImg" name="imgName" type="file" onchange="addImg()" required accept="image/*">
+                        <input class="d-none" style="pointer-events:auto" id="itemImg" name="imgName" type="file" onchange="addImg()" required accept="image/*">
                         <label for="itemImg"><div class="add-btn" role="button">등록</div></label>
                         <div class="delete-btn" role="button" onclick="removeImg()">삭제</div>
                     </div>
