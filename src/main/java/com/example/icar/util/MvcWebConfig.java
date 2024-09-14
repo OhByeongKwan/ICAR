@@ -13,6 +13,6 @@ public class MvcWebConfig implements WebMvcConfigurer {
                 //local path
 //                .addResourceLocations("file:/Users/obk/Desktop/icar/src/main/resources/static/uploads/");
                 //server path
-                .addResourceLocations("file:/home/ubuntu/ICAR/src/main/resources/static/uploads/");
+                .addResourceLocations("file:/home/ubuntu/ICAR/build/libs/src/main/resources/static/uploads/");
     }
 }
