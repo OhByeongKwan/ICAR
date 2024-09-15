@@ -70,7 +70,7 @@ textarea {
 
 @font-face {
   font-family: "gmarket_sans";
-  src: url("/static/font/GmarketSansTTFMedium.ttf");
+  src: url("../font/GmarketSansTTFMedium.ttf");
 }
 @media all and (min-width: 479px) {
   body {

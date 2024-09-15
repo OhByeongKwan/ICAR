@@ -18,7 +18,6 @@ public class mainApiController {
     private final FileHandler fileHandler;
 
     @PostMapping("/insertItem")
-//    public String  insertItem(@ModelAttribute AddItem item){
     public String  insertItem(@Validated @RequestParam("imgName") List<MultipartFile> imgName,
                               @RequestParam("inventory") String inventory,
                               @RequestParam("type") String type,
@@ -26,6 +25,8 @@ public class mainApiController {
                               @RequestParam("code") String code,
                               @RequestParam("year") String year,
                               @RequestParam("location") String location,
+                              @RequestParam("hlLocation") String hlLocation,
+                              @RequestParam("itemNumber") Long itemNumber,
                               @RequestParam("note") String note) throws Exception{
 
         List<Img> imgList = mainService.addImg(imgName);
@@ -37,12 +38,22 @@ public class mainApiController {
         addItem.setCode(code);
         addItem.setYear(year);
         addItem.setLocation(location);
+        if(hlLocation.isEmpty()){
+            addItem.setHlLocation("없음");
+        }else{
+            addItem.setHlLocation(hlLocation);
+        }
+        addItem.setItemNumber(itemNumber);
         addItem.setNote(note);
 
-        for (Img img : imgList) {
-            addItem.setImgName(img.getImgName());
-            addItem.setStoreName(img.getStoreName());
-            addItem.setImgPath(img.getImgPath());
+        if(imgList == null){
+            addItem.setStoreName("default.png");
+        }else{
+            for (Img img : imgList) {
+                addItem.setImgName(img.getImgName());
+                addItem.setStoreName(img.getStoreName());
+                addItem.setImgPath(img.getImgPath());
+            }
         }
 
         System.out.println(addItem);

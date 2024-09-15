@@ -4,9 +4,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/core.css">
+    <link rel="stylesheet" href="/css/core.scss">
     <link rel="icon" href="/assets/main/logo.svg" type="image/x-icon">
-    <link rel="stylesheet" href="/css/regist.css">
+    <link rel="stylesheet" href="/css/regist.scss">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <title>ICAR - DETAIL</title>
 </head>
@@ -50,6 +50,17 @@
                 <div class="item-location item-box d-flex justify-content-between align-items-center">
                     <label class="fw-bold" style="width:90px">위치</label>
                     <input class="w-100" maxlength="100" type="text" name="location" style="border-radius:5px;background-color:#EDEDED;border:none" placeholder="위치 입력" th:value="${item.location}" readonly />
+                </div>
+                <div class="item-hl-LR item-box d-flex justify-content-between align-items-center">
+                    <label class="fw-bold w-100">헤드라이트 위치</label>
+                    <div class="d-flex" style="gap:20px">
+                        <div class="d-flex" style="gap:10px"><label for="LH">LH</label><input class="w-100" id="LH" maxlength="100" type="radio" name="hlLocation" value="LH" disabled /></div>
+                        <div class="d-flex" style="gap:10px"><label for="RH">RH</label><input class="w-100" id="RH" maxlength="100" type="radio" name="hlLocation" value="RH" disabled /></div>
+                    </div>
+                </div>
+                <div class="item-number item-box d-flex justify-content-between align-items-center">
+                    <label class="fw-bold" style="width:max-content">수량</label>
+                    <div class="item-number-text" name="itemNumber"><blue style="color:#336DF3">[[${item.itemNumber}]]</blue> 개</div>
                 </div>
                 <div class="item-img item-box d-flex flex-column w-100">
                     <label class="fw-bold" style="width:90px">사진</label>
@@ -105,6 +116,7 @@
             }
             $('.content-box .item-note').removeClass('active');
             $('.content-box .inventory-select').removeClass('active');
+            $('.content-box .item-number').removeClass('active');
             return;
         }
 
@@ -116,14 +128,18 @@
             case 'hl' :
                 console.log(target)
                 $('.content-box .type-select').addClass('active');
+                let LRVal = [[${item.hlLocation}]];
+                $(`#${LRVal}`)[0].checked = true;
                 break;
             case 'hl-jaje' :
                 console.log(target)
                 $('.content-box .item-note').addClass('active');
+                $('.content-box .item-hl-LR').addClass('active');
                 break;
             case 'hl-module' :
                 console.log(target)
                 $('.content-box .type-select').addClass('active');
+                $('.content-box .item-hl-LR').addClass('active');
                 break;
         }
     }

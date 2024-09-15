@@ -4,9 +4,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/core.css">
+    <link rel="stylesheet" href="/css/core.scss">
     <link rel="icon" href="/assets/main/logo.svg" type="image/x-icon">
-    <link rel="stylesheet" href="/css/regist.css">
+    <link rel="stylesheet" href="/css/regist.scss">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <title>ICAR - REGIST</title>
 </head>
@@ -66,6 +66,21 @@
                 <div class="item-location item-box d-flex justify-content-between align-items-center">
                     <label class="fw-bold" style="width:90px">위치</label>
                     <input class="w-100" maxlength="100" type="text" name="location" style="border-radius:5px;background-color:#EDEDED;border:none" placeholder="위치 입력" required />
+                </div>
+                <div class="item-hl-LR item-box d-flex justify-content-between align-items-center">
+                    <label class="fw-bold w-100">헤드라이트 위치</label>
+                    <div class="d-flex" style="gap:20px">
+                        <div class="d-flex" style="gap:10px"><label for="LH">LH</label><input class="w-100" id="LH" maxlength="100" type="radio" name="hlLocation" value="LH" required checked /></div>
+                        <div class="d-flex" style="gap:10px"><label for="RH">RH</label><input class="w-100" id="RH" maxlength="100" type="radio" name="hlLocation" value="RH" required /></div>
+                    </div>
+                </div>
+                <div class="item-number item-box d-flex justify-content-between align-items-center">
+                    <label class="fw-bold" style="width:max-content">수량</label>
+                    <div class="d-flex align-items-center justify-content-between" style="width:100px">
+                        <div role="button" class="down-num fw-bold fs-20" onclick="downNum()">-</div>
+                        <div class="item-number-text" name="itemNumber">1</div>
+                        <div role="button" class="up-num fw-bold fs-20" onclick="upNum()">+</div>
+                    </div>
                 </div>
                 <div class="item-img item-box">
                     <label class="fw-bold" style="width:90px">사진</label>
@@ -141,6 +156,7 @@
         $('.item-year input')[0].value = null;
         $('.item-location input')[0].value = null;
         $('.item-note textarea')[0].value = null;
+        $('.item-number .item-number-text')[0].innerText = 1;
         removeImg();
 
         let arr = $('.content-box>div');
@@ -151,6 +167,7 @@
             }
             $('.content-box .item-note').removeClass('active');
             $('.content-box .inventory-select').removeClass('active');
+            $('.content-box .item-number').removeClass('active');
             return;
         }
 
@@ -166,10 +183,12 @@
             case 'hl-jaje' :
                 console.log(target)
                 $('.content-box .item-note').addClass('active');
+                $('.content-box .item-hl-LR').addClass('active');
                 break;
             case 'hl-module' :
                 console.log(target)
                 $('.content-box .type-select').addClass('active');
+                $('.content-box .item-hl-LR').addClass('active');
                 break;
         }
     }
@@ -199,6 +218,7 @@
     function addItem(){
         let data1 = $('.inventory-select .select-title')[0].innerText;
         let data2 = $('.type-select .type-title')[0].innerText;
+        let data3 = parseInt($('.item-number .item-number-text')[0].innerText);
 
         if($('.type-select').hasClass('active')){
             data2 = "";
@@ -207,7 +227,13 @@
         let formData = new FormData(document.querySelector('#insertItem'));
         formData.append('inventory', data1);
         formData.append('type', data2);
+        formData.append('itemNumber', data3);
+        if($('.item-hl-LR').hasClass('active')){
+            formData.set('hlLocation', "");
+        }
+
         let vdata = Utils.formToObject(formData);
+        console.log(vdata);
 
         AJAX.post('/insertItem', formData).then((res)=>{
             console.log(res);
@@ -242,12 +268,12 @@
             });
             return;
         }
-        if($('.item-img input')[0].value === null || $('.item-img input')[0].value === undefined || $('.item-img input')[0].value === ""){
-            Dialog.alert(`${$('.item-img label')[0].innerText}을(를) 등록하세요.`, ()=>{
-                $('.item-img input').focus();
-            });
-            return;
-        }
+        // if($('.item-img input')[0].value === null || $('.item-img input')[0].value === undefined || $('.item-img input')[0].value === ""){
+            // Dialog.alert(`${$('.item-img label')[0].innerText}을(를) 등록하세요.`, ()=>{
+            //     $('.item-img input').focus();
+            // });
+            // return;
+        // }
 
         addItem();
     }
@@ -261,6 +287,17 @@
         }
 
         addItem();
+    }
+
+    function upNum(){
+        $('.item-number .item-number-text')[0].innerText = parseInt($('.item-number .item-number-text')[0].innerText) + 1;
+
+    }
+
+    function downNum(){
+        if($('.item-number .item-number-text')[0].innerText <= 1) return;
+        $('.item-number .item-number-text')[0].innerText = parseInt($('.item-number .item-number-text')[0].innerText) - 1;
+
     }
 </script>
 </body>

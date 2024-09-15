@@ -73,8 +73,18 @@
 .main-container .content-box .item-note.active {
   display: none;
 }
-.main-container .content-box .item-name.active, .main-container .content-box .item-code.active, .main-container .content-box .item-year.active, .main-container .content-box .item-location.active {
+.main-container .content-box .item-name.active, .main-container .content-box .item-code.active, .main-container .content-box .item-year.active, .main-container .content-box .item-location.active, .main-container .content-box .item-hl-LR.active, .main-container .content-box .item-number.active {
   display: none !important;
+}
+.main-container .content-box .item-number .up-num, .main-container .content-box .item-number .down-num {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #336DF3;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
 }
 
 .add-btn {
@@ -111,4 +121,8 @@ input, textarea {
 
 input:focus, textarea:focus {
   outline: 2px solid #336DF3;
+}
+
+input[type=radio] {
+  outline: none;
 }

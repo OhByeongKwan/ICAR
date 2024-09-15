@@ -22,6 +22,10 @@ public class AddItem {
 
     private String location;
 
+    private String hlLocation;
+
+    private Long itemNumber;
+
     private String imgName;
 
     private String storeName;

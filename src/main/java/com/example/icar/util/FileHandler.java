@@ -30,7 +30,6 @@ public class FileHandler {
         String absolutePath = new File("").getAbsolutePath() + "/";
 
         // 경로를 지정하고 그곳에다가 저장
-        //aws 서버 배포 시 서버에 맞게 변경해줘야함
         String path = "src/main/resources/static/uploads";
 //        String path = "src/main/resources/templates/images";
 //        String path2 = "build/resources/main/templates/images";
@@ -81,7 +80,6 @@ public class FileHandler {
                 fileList.add(item);
 
                 // 저장된 파일로 변경하여 이를 보여주기 위함
-                //aws 서버 배포 시 서버에 맞게 변경해줘야함
                 file = new File(absolutePath + path + "/" + new_file_name);
                 multipartFile.transferTo(file);
             }

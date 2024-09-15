@@ -76,8 +76,20 @@
     .item-note.active{
       display:none;
     }
-    .item-name.active, .item-code.active, .item-year.active, .item-location.active{
+    .item-name.active, .item-code.active, .item-year.active, .item-location.active, .item-hl-LR.active, .item-number.active{
       display: none!important;
+    }
+    .item-number{
+      .up-num, .down-num{
+        display:flex;
+        justify-content: center;
+        align-items:center;
+        background-color:#336DF3;
+        color:white;
+        width:30px;
+        height:30px;
+        border-radius:5px;
+      }
     }
   }
 }
@@ -111,4 +123,7 @@ input, textarea{
 }
 input:focus, textarea:focus{
   outline:2px solid #336DF3;
+}
+input[type='radio']{
+  outline: none;
 }

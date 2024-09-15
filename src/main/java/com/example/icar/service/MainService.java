@@ -26,19 +26,51 @@ public class MainService {
 
     public String insertItem(AddItem item){
         Item newItem = new Item();
+        Optional<Item> old = mainRepository.findByName(item.getName());
 
-        newItem.setInventory(item.getInventory());
-        newItem.setType(item.getType());
-        newItem.setCode(item.getCode());
-        newItem.setYear(item.getYear());
-        newItem.setLocation(item.getLocation());
-        newItem.setNote(item.getNote());
-        newItem.setName(item.getName());
-        newItem.setImgName(item.getImgName());
-        newItem.setStoreName(item.getStoreName());
-        newItem.setImgPath(item.getImgPath());
+        System.out.println(old.isEmpty());
+        if(old.isEmpty()){
+            newItem.setInventory(item.getInventory());
+            newItem.setType(item.getType());
+            newItem.setCode(item.getCode());
+            newItem.setYear(item.getYear());
+            newItem.setLocation(item.getLocation());
+            newItem.setHlLocation(item.getHlLocation());
+            newItem.setItemNumber(item.getItemNumber());
+            newItem.setNote(item.getNote());
+            newItem.setName(item.getName());
+            newItem.setImgName(item.getImgName());
+            newItem.setStoreName(item.getStoreName());
+            newItem.setImgPath(item.getImgPath());
 
-        mainRepository.save(newItem);
+            mainRepository.save(newItem);
+        }else{
+            Item oldItem = old.get();
+
+            oldItem.setInventory(oldItem.getInventory());
+            oldItem.setType(oldItem.getType());
+            oldItem.setName(oldItem.getName());
+            oldItem.setCode(oldItem.getCode());
+            oldItem.setYear(oldItem.getYear());
+            oldItem.setLocation(oldItem.getLocation());
+            oldItem.setItemNumber(oldItem.getItemNumber() + item.getItemNumber());
+            oldItem.setHlLocation(oldItem.getHlLocation());
+            oldItem.setNote(oldItem.getNote());
+
+            if(item.getStoreName().equals("default.png")){
+                System.out.println("이미지 없음 스킵!!");
+            }else {
+                String absolutePath = new File("").getAbsolutePath() + "/";
+                String path = item.getImgPath();
+                String img_store_name = item.getStoreName();
+
+                // 전체 경로를 생성합니다.
+                File fileToDelete = new File(absolutePath + path + "/" + img_store_name);
+
+                fileToDelete.delete();
+            }
+        }
+
         return "저장 성공";
     }
 
@@ -46,9 +78,9 @@ public class MainService {
 // 파일을 저장하고 그 Board 에 대한 list 를 가지고 있는다
         List<Img> list = fileHandler.parseFileInfo(img);
 
-//        if (list.isEmpty()){
-//            // TODO : 파일이 없을 땐 어떻게 해야할까.. 고민을 해보아야 할 것
-//        }
+        if (list.isEmpty()){
+            return null;
+        }
 //        // 파일에 대해 DB에 저장하고 가지고 있을 것
 //        else{
 //            List<Img> pictureBeans = new ArrayList<>();
@@ -66,16 +98,21 @@ public class MainService {
     public String deleteItem(Long idx){
         Optional<Item> item = mainRepository.findById(idx);
 
-        String absolutePath = new File("").getAbsolutePath() + "/";
-        String path = item.get().getImgPath();
-        String img_store_name = item.get().getStoreName();
+        Item oldItem = item.get();
+        if(oldItem.getStoreName().equals("default.png")){
+            System.out.println("이미지 없음 스킵!!");
+        }else {
+            String absolutePath = new File("").getAbsolutePath() + "/";
+            String path = item.get().getImgPath();
+            String img_store_name = item.get().getStoreName();
 
-        // 전체 경로를 생성합니다.
-        File fileToDelete = new File(absolutePath + path + "/" + img_store_name);
+            // 전체 경로를 생성합니다.
+            File fileToDelete = new File(absolutePath + path + "/" + img_store_name);
 
-        fileToDelete.delete();
+            fileToDelete.delete();
+        }
 
-        mainRepository.deleteById(item.get().getIdx());
+        mainRepository.deleteById(oldItem.getIdx());
         return "삭제 성공";
     }
 
@@ -89,6 +126,8 @@ public class MainService {
         oldItem.setCode(editItem.getCode());
         oldItem.setYear(editItem.getYear());
         oldItem.setLocation(editItem.getLocation());
+        oldItem.setItemNumber(editItem.getItemNumber());
+        oldItem.setHlLocation(editItem.getHlLocation());
         oldItem.setNote(editItem.getNote());
 
         return "수정 성공";

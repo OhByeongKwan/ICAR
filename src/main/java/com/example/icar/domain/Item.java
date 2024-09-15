@@ -26,6 +26,10 @@ public class Item {
 
     private String location;
 
+    private String hlLocation;
+
+    private Long itemNumber;
+
     private String imgName;
 
     private String storeName;

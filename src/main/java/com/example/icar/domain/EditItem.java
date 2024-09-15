@@ -20,5 +20,9 @@ public class EditItem {
 
     private String location;
 
+    private Long itemNumber;
+
+    private String hlLocation;
+
     private String note;
 }

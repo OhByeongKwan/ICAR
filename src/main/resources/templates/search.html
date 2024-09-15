@@ -4,9 +4,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/core.css">
+    <link rel="stylesheet" href="/css/core.scss">
     <link rel="icon" href="/assets/main/logo.svg" type="image/x-icon">
-    <link rel="stylesheet" href="/css/search.css">
+    <link rel="stylesheet" href="/css/search.scss">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <title>ICAR - SEARCH</title>
 </head>
@@ -39,7 +39,11 @@
     $(document).ready(()=>{
        AJAX.get('/getItemAll').then((res)=>{
           console.log(res);
-          setItemList(res);
+          if(res.length == 0){
+              $('.main-container .item-list').append('<div class="fw-bold text-center">아이템이 없습니다.</div>');
+          }else {
+              setItemList(res);
+          }
        });
 
         Dialog.init();
@@ -52,7 +56,7 @@
         for(let target of res){
             if(target.inventory == '헤드라이트 고품'){
                 $('.main-container .item-list').append(`<div class="content-item item-${target.idx}" data-id="${target.idx}">
-                <div role="button" class="item-info-box" onclick="Page.go('/detail?idx=${target.idx}')">
+                <div role="button" class="item-info-box" onclick="Page.go('/detail?idx=${target.idx}');scrollSave()">
                     <div class="item-info" style="max-width:100%;margin-left:0">
                         <div class="item-note item d-block">
                             <label>비고</label>
@@ -70,7 +74,7 @@
             }
             $('.main-container .item-list').append(`<div class="content-item item-${target.idx}" data-id="${target.idx}">
                 <div class="item-info-box">
-                    <img role="button" class="item-img" src="/uploads/${target.storeName}?timestamp=${timestamp}" onclick="Page.go('/detail?idx=${target.idx}')">
+                    <img role="button" class="item-img" src="/uploads/${target.storeName}?timestamp=${timestamp}" onclick="Page.go('/detail?idx=${target.idx}');scrollSave()">
                     <div class="item-info">
                         <div class="item-name item d-block">
                             <label>부품명</label>
@@ -88,6 +92,10 @@
                             <label>위치</label>
                             <div>${target.location}</div>
                         </div>
+                        <div class="item-hl-location item">
+                            <label>HL위치</label>
+                            <div>${target.hlLocation}</div>
+                        </div>
                     </div>
                 </div>
                 <div class="buttons d-flex">
@@ -96,6 +104,10 @@
                 </div>
             </div>`);
         }
+
+        //스크롤 위치 저장 기능 추후에 필요하면 추가
+        // let scrollY = parseInt(sessionStorage.getItem("scrollY"));
+        // window.scrollTo(0, scrollY);
     }
 
     function searchText(){
@@ -149,6 +161,11 @@
                 });
             });
         });
+    }
+
+    function scrollSave(){
+        let scrollHeight = $(document).scrollTop();
+        sessionStorage.setItem("scrollY", scrollHeight);
     }
 </script>
 </body>
