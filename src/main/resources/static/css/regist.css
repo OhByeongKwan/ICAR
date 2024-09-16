@@ -105,6 +105,7 @@
   color: #FF0000;
   border-radius: 5px;
   font-size: 12px;
+  white-space: nowrap;
 }
 
 .add-inven-btn {
@@ -113,6 +114,7 @@
   border-radius: 5px;
   margin-top: -6px;
   color: white;
+  white-space: nowrap;
 }
 
 input, textarea {
