@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "scss": "sass src/main/resources/static/css/core.scss:src/main/resources/static/css/core.css --no-source-map",
-    "scss": "sass src/main/resources/static/css/regist.scss:src/main/resources/static/css/regist.css --no-source-map"
+    "scss": "sass src/main/resources/static/css/core.scss:src/main/resources/static/css/core.css --no-source-map && sass src/main/resources/static/css/regist.scss:src/main/resources/static/css/regist.css --no-source-map && sass src/main/resources/static/css/main.scss:src/main/resources/static/css/main.css --no-source-map && sass src/main/resources/static/css/search.scss:src/main/resources/static/css/search.css --no-source-map"
   },
   "repository": {
     "type": "git",
