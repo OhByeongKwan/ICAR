@@ -118,6 +118,14 @@
         for(let item of itemList){
             let cls = $(item)[0].className.split(' ')[1];
 
+            // console.log($(`.${cls} .item-code div`)[0].innerText)
+            // if($(`.${cls} .item-code div`)[0].innerText.indexOf(text)!= -1){
+            //     $(item).removeClass('hide');
+            // }else{
+            //     $(item).addClass('hide');
+            //     continue;
+            // }
+
             if($(`.${cls} .item-name div`)[0] == undefined){
                 if($(`.${cls} .item-note textarea`)[0].value.indexOf(text)!= -1){
                     $(item).removeClass('hide');
@@ -131,7 +139,9 @@
                 $(item).removeClass('hide');
             }else{
                 $(item).addClass('hide');
+                continue;
             }
+
         }
     }
 

@@ -26,50 +26,65 @@ public class MainService {
 
     public String insertItem(AddItem item){
         Item newItem = new Item();
-        Optional<Item> old = mainRepository.findByName(item.getName());
+//        Optional<Item> old = mainRepository.findByName(item.getName());
 
-        System.out.println(old.isEmpty());
-        if(old.isEmpty()){
-            newItem.setInventory(item.getInventory());
-            newItem.setType(item.getType());
-            newItem.setCode(item.getCode());
-            newItem.setYear(item.getYear());
-            newItem.setLocation(item.getLocation());
-            newItem.setHlLocation(item.getHlLocation());
-            newItem.setItemNumber(item.getItemNumber());
-            newItem.setNote(item.getNote());
-            newItem.setName(item.getName());
-            newItem.setImgName(item.getImgName());
-            newItem.setStoreName(item.getStoreName());
-            newItem.setImgPath(item.getImgPath());
+        newItem.setInventory(item.getInventory());
+        newItem.setType(item.getType());
+        newItem.setCode(item.getCode());
+        newItem.setYear(item.getYear());
+        newItem.setLocation(item.getLocation());
+        newItem.setHlLocation(item.getHlLocation());
+        newItem.setItemNumber(item.getItemNumber());
+        newItem.setNote(item.getNote());
+        newItem.setName(item.getName());
+        newItem.setImgName(item.getImgName());
+        newItem.setStoreName(item.getStoreName());
+        newItem.setImgPath(item.getImgPath());
 
-            mainRepository.save(newItem);
-        }else{
-            Item oldItem = old.get();
+        mainRepository.save(newItem);
 
-            oldItem.setInventory(oldItem.getInventory());
-            oldItem.setType(oldItem.getType());
-            oldItem.setName(oldItem.getName());
-            oldItem.setCode(oldItem.getCode());
-            oldItem.setYear(oldItem.getYear());
-            oldItem.setLocation(oldItem.getLocation());
-            oldItem.setItemNumber(oldItem.getItemNumber() + item.getItemNumber());
-            oldItem.setHlLocation(oldItem.getHlLocation());
-            oldItem.setNote(oldItem.getNote());
-
-            if(item.getStoreName().equals("default.png")){
-                System.out.println("이미지 없음 스킵!!");
-            }else {
-                String absolutePath = new File("").getAbsolutePath() + "/";
-                String path = item.getImgPath();
-                String img_store_name = item.getStoreName();
-
-                // 전체 경로를 생성합니다.
-                File fileToDelete = new File(absolutePath + path + "/" + img_store_name);
-
-                fileToDelete.delete();
-            }
-        }
+//        System.out.println(old.isEmpty());
+//        if(old.isEmpty()){
+//            newItem.setInventory(item.getInventory());
+//            newItem.setType(item.getType());
+//            newItem.setCode(item.getCode());
+//            newItem.setYear(item.getYear());
+//            newItem.setLocation(item.getLocation());
+//            newItem.setHlLocation(item.getHlLocation());
+//            newItem.setItemNumber(item.getItemNumber());
+//            newItem.setNote(item.getNote());
+//            newItem.setName(item.getName());
+//            newItem.setImgName(item.getImgName());
+//            newItem.setStoreName(item.getStoreName());
+//            newItem.setImgPath(item.getImgPath());
+//
+//            mainRepository.save(newItem);
+//        }else{
+//            Item oldItem = old.get();
+//
+//            oldItem.setInventory(oldItem.getInventory());
+//            oldItem.setType(oldItem.getType());
+//            oldItem.setName(oldItem.getName());
+//            oldItem.setCode(oldItem.getCode());
+//            oldItem.setYear(oldItem.getYear());
+//            oldItem.setLocation(oldItem.getLocation());
+//            oldItem.setItemNumber(oldItem.getItemNumber() + item.getItemNumber());
+//            oldItem.setHlLocation(oldItem.getHlLocation());
+//            oldItem.setNote(oldItem.getNote());
+//
+//            if(item.getStoreName().equals("default.png")){
+//                System.out.println("이미지 없음 스킵!!");
+//            }else {
+//                String absolutePath = new File("").getAbsolutePath() + "/";
+//                String path = item.getImgPath();
+//                String img_store_name = item.getStoreName();
+//
+//                // 전체 경로를 생성합니다.
+//                File fileToDelete = new File(absolutePath + path + "/" + img_store_name);
+//
+//                fileToDelete.delete();
+//            }
+//        }
 
         return "저장 성공";
     }

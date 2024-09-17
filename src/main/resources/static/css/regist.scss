@@ -101,6 +101,7 @@
   color:#336DF3;
   border-radius:5px;
   font-size:12px;
+  white-space: nowrap;
 }
 .delete-btn{
   min-width:42px;
@@ -118,7 +119,6 @@
   border-radius:5px;
   margin-top:-6px;
   color:white;
-  white-space: nowrap;
 }
 input, textarea{
   padding:4px;
