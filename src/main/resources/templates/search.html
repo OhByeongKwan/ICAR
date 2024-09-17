@@ -66,7 +66,7 @@
                 </div>
                 <div class="buttons d-flex">
                     <div role="button" class="use-btn w-50" onclick="useDeleteItem(${target.idx})">사용</div>
-                    <div role="button" class="send-btn w-50" onclick="sendDeleteItem(${target.idx})">출고</div>
+<!--                    <div role="button" class="send-btn w-50" onclick="sendDeleteItem(${target.idx})">출고</div>-->
                 </div>
             </div>`);
 
@@ -100,7 +100,7 @@
                 </div>
                 <div class="buttons d-flex">
                     <div role="button" class="use-btn w-50" onclick="useDeleteItem(${target.idx})">사용</div>
-                    <div role="button" class="send-btn w-50" onclick="sendDeleteItem(${target.idx})">출고</div>
+<!--                    <div role="button" class="send-btn w-50" onclick="sendDeleteItem(${target.idx})">출고</div>-->
                 </div>
             </div>`);
         }
@@ -118,14 +118,6 @@
         for(let item of itemList){
             let cls = $(item)[0].className.split(' ')[1];
 
-            // console.log($(`.${cls} .item-code div`)[0].innerText)
-            // if($(`.${cls} .item-code div`)[0].innerText.indexOf(text)!= -1){
-            //     $(item).removeClass('hide');
-            // }else{
-            //     $(item).addClass('hide');
-            //     continue;
-            // }
-
             if($(`.${cls} .item-name div`)[0] == undefined){
                 if($(`.${cls} .item-note textarea`)[0].value.indexOf(text)!= -1){
                     $(item).removeClass('hide');
@@ -135,7 +127,7 @@
                 continue;
             }
 
-            if($(`.${cls} .item-name div`)[0].innerText.indexOf(text)!= -1){
+            if($(`.${cls} .item-name div`)[0].innerText.indexOf(text)!= -1 || $(`.${cls} .item-code div`)[0].innerText.indexOf(text)!= -1){
                 $(item).removeClass('hide');
             }else{
                 $(item).addClass('hide');
@@ -160,18 +152,18 @@
         });
     }
 
-    function sendDeleteItem(idx){
-        console.log(idx);
-
-        Dialog.confirm('출고하시겠습니까?', ()=>{
-            AJAX.delete(`/deleteItem/${idx}`).then((res)=>{
-                console.log(res);
-                Dialog.alert('출고되었습니다.', ()=>{
-                    Page.reload();
-                });
-            });
-        });
-    }
+    // function sendDeleteItem(idx){
+    //     console.log(idx);
+    //
+    //     Dialog.confirm('출고하시겠습니까?', ()=>{
+    //         AJAX.delete(`/deleteItem/${idx}`).then((res)=>{
+    //             console.log(res);
+    //             Dialog.alert('출고되었습니다.', ()=>{
+    //                 Page.reload();
+    //             });
+    //         });
+    //     });
+    // }
 
     function scrollSave(){
         let scrollHeight = $(document).scrollTop();
