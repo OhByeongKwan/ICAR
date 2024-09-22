@@ -69,24 +69,6 @@
 .main-container .item-list .content-item.hide {
   display: none;
 }
-.main-container .item-list .use-btn {
-  font-weight: bold;
-  padding: 7px 0;
-  color: #FF0000;
-  background-color: #FFE0E0;
-  border-top: 1px solid #FFC1C1;
-  text-align: center;
-  border-radius: 0 0 5px 5px;
-}
-.main-container .item-list .send-btn {
-  font-weight: bold;
-  padding: 7px 0;
-  color: #336DF3;
-  background-color: #ECF5FF;
-  border-top: 1px solid #D7E3FF;
-  text-align: center;
-  border-radius: 0 0 5px 0;
-}
 
 input:focus, textarea:focus {
   outline: 2px solid #336DF3;

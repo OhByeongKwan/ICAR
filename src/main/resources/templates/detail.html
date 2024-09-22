@@ -75,7 +75,10 @@
                         <textarea class="w-100" name="note" maxlength="300" type="text" style="border-radius:5px;background-color:#EDEDED;border:none;min-height:74px" placeholder="비고사항을 입력하세요." th:text="${item.note}" readonly></textarea>
                     </div>
                 </div>
-                <div role="button" class="add-inven-btn w-100 fw-bold text-center" th:onclick="|Page.go('/edit?idx=@{${item.idx}}')|">수정하기</div>
+                <div class="d-flex justify-content-between">
+                    <div role="button" class="add-inven-btn fw-bold text-center" style="width:49%" th:onclick="|Page.go('/edit?idx=@{${item.idx}}')|">수정하기</div>
+                    <div role="button" class="use-btn" style="width:49%" th:onclick="|useDeleteItem(@{${item.idx}})|">사용</div>
+                </div>
             </div>
         </form>
     </div>
@@ -105,6 +108,7 @@
         }
 
         disappearInput(inven);
+        Dialog.init();
     });
 
     function disappearInput(target){
@@ -142,6 +146,21 @@
                 $('.content-box .item-hl-LR').addClass('active');
                 break;
         }
+    }
+
+    function useDeleteItem(idx){
+        console.log(idx);
+
+        Dialog.confirm("사용하시겠습니까?")
+
+        Dialog.confirm('사용하시겠습니까?', ()=>{
+            AJAX.delete(`/deleteItem/${idx}`).then((res)=>{
+                console.log(res);
+                Dialog.alert('사용되었습니다.', ()=>{
+                    Page.go('/search');
+                });
+            });
+        });
     }
 </script>
 </body>

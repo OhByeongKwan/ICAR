@@ -64,10 +64,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="buttons d-flex">
-                    <div role="button" class="use-btn w-50" onclick="useDeleteItem(${target.idx})">사용</div>
+<!--                <div class="buttons d-flex">-->
+<!--                    <div role="button" class="use-btn w-50" onclick="useDeleteItem(${target.idx})">사용</div>-->
 <!--                    <div role="button" class="send-btn w-50" onclick="sendDeleteItem(${target.idx})">출고</div>-->
-                </div>
+<!--                </div>-->
             </div>`);
 
                 continue;
@@ -98,10 +98,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="buttons d-flex">
-                    <div role="button" class="use-btn w-100" onclick="useDeleteItem(${target.idx})">사용</div>
+<!--                <div class="buttons d-flex">-->
+<!--                    <div role="button" class="use-btn w-100" onclick="useDeleteItem(${target.idx})">사용</div>-->
 <!--                    <div role="button" class="send-btn w-50" onclick="sendDeleteItem(${target.idx})">출고</div>-->
-                </div>
+<!--                </div>-->
             </div>`);
         }
 
@@ -137,20 +137,20 @@
         }
     }
 
-    function useDeleteItem(idx){
-        console.log(idx);
-
-        Dialog.confirm("사용하시겠습니까?")
-
-        Dialog.confirm('사용하시겠습니까?', ()=>{
-            AJAX.delete(`/deleteItem/${idx}`).then((res)=>{
-                console.log(res);
-                Dialog.alert('사용되었습니다.', ()=>{
-                    Page.reload();
-                });
-            });
-        });
-    }
+    // function useDeleteItem(idx){
+    //     console.log(idx);
+    //
+    //     Dialog.confirm("사용하시겠습니까?")
+    //
+    //     Dialog.confirm('사용하시겠습니까?', ()=>{
+    //         AJAX.delete(`/deleteItem/${idx}`).then((res)=>{
+    //             console.log(res);
+    //             Dialog.alert('사용되었습니다.', ()=>{
+    //                 Page.reload();
+    //             });
+    //         });
+    //     });
+    // }
 
     // function sendDeleteItem(idx){
     //     console.log(idx);
