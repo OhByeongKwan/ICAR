@@ -24,7 +24,7 @@
         <div class="all-text d-flex justify-content-between">
             <div>전체</div>
             <div class="d-flex" style="color:black">
-                <div class="item-count" style="color:#336DF3"></div>개
+                <div class="item-count-all" style="color:#336DF3"></div>개
             </div>
         </div>
         <div class="item-list"></div>
@@ -44,7 +44,7 @@
     $(document).ready(()=>{
        AJAX.get('/getItemAll').then((res)=>{
           console.log(res);
-          $('.all-text .item-count')[0].innerText = res.length;
+          $('.all-text .item-count-all')[0].innerText = res.length;
           if(res.length == 0){
               $('.main-container .item-list').append('<div class="fw-bold text-center">아이템이 없습니다.</div>');
           }else {
@@ -99,8 +99,12 @@
                             <div>${target.location}</div>
                         </div>
                         <div class="item-hl-location item">
-                            <label>HL위치</label>
+                            <label>방향</label>
                             <div>${target.hlLocation}</div>
+                        </div>
+                        <div class="item-count item">
+                            <label>수량</label>
+                            <div>${target.itemNumber}</div>
                         </div>
                     </div>
                 </div>
