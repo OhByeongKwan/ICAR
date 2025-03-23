@@ -132,6 +132,7 @@ public class MainService {
     }
 
     public String editItem(EditItem editItem){
+        System.out.println(editItem);
         Optional<Item> item = mainRepository.findById(editItem.getIdx());
         Item oldItem = item.get();
 
@@ -143,8 +144,14 @@ public class MainService {
         oldItem.setLocation(editItem.getLocation());
         oldItem.setItemNumber(editItem.getItemNumber());
         oldItem.setHlLocation(editItem.getHlLocation());
+        if(editItem.getHlLocation().isEmpty()){
+            oldItem.setHlLocation("없음");
+        }else{
+            oldItem.setHlLocation(editItem.getHlLocation());
+        }
         oldItem.setNote(editItem.getNote());
 
+        System.out.println(oldItem);
         return "수정 성공";
     }
 }
