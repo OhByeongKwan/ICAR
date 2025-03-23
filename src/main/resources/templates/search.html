@@ -60,6 +60,9 @@
 
         $('.main-container .item-list *').remove();
         for(let target of res){
+            if(target.itemNumber == 0){
+                target.itemNumber = '없음';
+            }
             if(target.inventory == '헤드라이트 고품'){
                 $('.main-container .item-list').append(`<div class="content-item item-${target.idx}" data-id="${target.idx}">
                 <div role="button" class="item-info-box" onclick="Page.go('/detail?idx=${target.idx}');scrollSave()">

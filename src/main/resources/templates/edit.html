@@ -227,6 +227,9 @@
         formData.append('inventory', data1);
         formData.append('type', data2);
         formData.append('itemNumber', data3);
+        //if($('.item-hl-LR').hasClass('active')){
+        //    formData.set('hlLocation', "");
+        //}
         let vdata = Utils.formToObject(formData);
         console.log(vdata);
 
@@ -276,12 +279,21 @@
 
     function upNum(){
         $('.item-number .item-number-text')[0].innerText = parseInt($('.item-number .item-number-text')[0].innerText) + 1;
+        //if($('.item-number .item-number-text')[0].innerText === '없음'){
+        //    $('.item-number .item-number-text')[0].innerText = 1;
+        //}else{
+        //    $('.item-number .item-number-text')[0].innerText = parseInt($('.item-number .item-number-text')[0].innerText) + 1;
+        //}
 
     }
 
     function downNum(){
-        if($('.item-number .item-number-text')[0].innerText <= 1) return;
+        if($('.item-number .item-number-text')[0].innerText <= 0) return;
+        //if($('.item-number .item-number-text')[0].innerText <= 0 || $('.item-number .item-number-text')[0].innerText === '없음') return;
         $('.item-number .item-number-text')[0].innerText = parseInt($('.item-number .item-number-text')[0].innerText) - 1;
+        //if($('.item-number .item-number-text')[0].innerText == 0){
+        //    $('.item-number .item-number-text')[0].innerText = '없음';
+        //}
 
     }
 </script>
