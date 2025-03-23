@@ -173,12 +173,13 @@
         switch (target){
             case 'hl' :
                 console.log(target)
+                let LRVal = null;
                 $('.content-box .type-select').addClass('active');
                 console.log([[${item.hlLocation}]])
                 if([[${item.hlLocation}]] == '없음'){
-                    let LRVal = 'LH';
+                    LRVal = 'LH';
                 }else{
-                    let LRVal = [[${item.hlLocation}]];
+                    LRVal = [[${item.hlLocation}]];
                 }
                 $(`#${LRVal}`)[0].checked = true;
                 break;
