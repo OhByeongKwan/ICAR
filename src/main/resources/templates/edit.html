@@ -174,7 +174,12 @@
             case 'hl' :
                 console.log(target)
                 $('.content-box .type-select').addClass('active');
-                let LRVal = [[${item.hlLocation}]];
+                console.log([[${item.hlLocation}]])
+                if([[${item.hlLocation}]] == '없음'){
+                    let LRVal = 'LH';
+                }else{
+                    let LRVal = [[${item.hlLocation}]];
+                }
                 $(`#${LRVal}`)[0].checked = true;
                 break;
             case 'hl-jaje' :
